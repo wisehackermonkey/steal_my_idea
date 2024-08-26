@@ -1,3 +1,4 @@
+db/
 # Python specific
 .env
 .git/
