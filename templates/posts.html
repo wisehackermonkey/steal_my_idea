@@ -11,11 +11,11 @@
   </div>
   <div class="level">
     <div class="level-item"  >
-      <button class="button" style="margin: 10px" get="/vote/{{ post[0] }}" target="vote{{post[0]}}">👍</button>
-      <p id="vote{{ post[0]}}" class="card" style="margin: 10px">+33</p>
-      <button class="button" style="margin: 10px" get="/vote/{{ post[0] }}" target="vote{{post[0]}}" >👎</button>
+      <button class="button" style="margin: 10px" get="/vote/up/{{ post[0] }}" target="vote{{post[0]}}" >👍</button>
+      <p id="vote{{ post[0]}}" class="card" style="margin: 10px">{{ post[4]}}</p>
+      <button class="button" style="margin: 10px" get="/vote/down/{{ post[0] }}" target="vote{{post[0]}}" >👎</button>
     </div>
-     <div class="level-item" style="">
+     <div class="level-item" >
       <p class="card" style="margin: 10px">2024-08-26</p> 
     </div>
   </div>

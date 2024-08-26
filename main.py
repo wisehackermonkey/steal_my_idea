@@ -55,23 +55,40 @@ def create_post():
     res = insert_post(text,"oranc","20240826",1)
     return "1"+ str(res)
 
-@app.route("/vote/", methods=["POST"])
-def update_vote(vote):
+@app.route("/vote/up/<int:rowid>", methods=["POST"])
+def up_vote(rowid):
+    print("up")
     vote = request.form["vote"]
-    rowid = request.form["post_id"]
-
+    vote = int(vote)
+    vote += 1
     con = sqlite3.connect("db/database.db")
     cur = con.cursor()
-    cur.execute("""
-    UPDATE posts SET vote = {vote} WHERE rowid = {rowid} 
+    cur.execute(f"""
+    UPDATE posts SET votes = {vote} WHERE rowid = {rowid} 
                 """)
     con.commit()
     con.close()
-    return "+122"
+    return  str(vote), 200
+
+@app.route("/vote/down/<int:rowid>", methods=["POST"])
+def down_vote(rowid):
+    print("down")
+    vote = request.form["vote"]
+    vote = int(vote)
+    vote -= 1
+    con = sqlite3.connect("db/database.db")
+    cur = con.cursor()
+    cur.execute(f"""
+    UPDATE posts SET votes = {vote} WHERE rowid = {rowid} 
+                """)
+    con.commit()
+    con.close()
+    return  str(vote), 200
+
 
 # 404 error
-@app.errorhandler(404)
-def page_not_found():
-    return "404",404
+# @app.errorhandler(404)
+# def page_not_found():
+#     return "404",404
 
 app.run("0.0.0.0", port=3000, debug=True)
